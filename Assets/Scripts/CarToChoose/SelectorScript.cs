@@ -1,33 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SelectorScript : MonoBehaviour
 {
+
+    //Переменные машин
     public GameObject audi;
     public GameObject car;
     public GameObject black_viper;
     public GameObject mini_truck;
 
     private SpriteRenderer audiRenderer, carRenderer, black_viperRenderer, mini_truckRenderer;
-
+    
+    //Переменные расположения машины на экране и остальных за экраном
     private Vector3 characterPosition;
     private Vector3 offScreen;
 
-    private int characterInt = 1;
+    private int characterInt = 1;//идентификатор персонажей
 
     private readonly string selectedCaracter = "SelectedCharacter";
 
+    public AudioSource audioSRC;
+
     private void Awake()
     {
-        characterPosition = audi.transform.position;
-        offScreen = car.transform.position;
+        characterPosition = audi.transform.position; //указываем, что стартовое положение машины - положение первой машины
+        offScreen = car.transform.position;//а это положение за пределами экрана
 
         audiRenderer = audi.GetComponent<SpriteRenderer>();
         carRenderer = audi.GetComponent<SpriteRenderer>();
         black_viperRenderer = audi.GetComponent<SpriteRenderer>();
         mini_truckRenderer = audi.GetComponent<SpriteRenderer>();
+
+        audioSRC.volume = PlayerPrefs.GetFloat("VolumeLevel");
     }
 
     public void NextCharacter()
